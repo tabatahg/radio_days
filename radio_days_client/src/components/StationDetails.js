@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../components/Card";
 import CardSection from "../components/CardSection";
 import { StyleSheet, Text, View, Image, Button } from "react-native";
 
 const StationDetails = props => {
+  const [gps, setGps] = useState([]);
+
+  const gpsfunc = async () => {
+    const coord = () =>
+      navigator.geolocation.getCurrentPosition(position => {
+        gpsPosition = position;
+        return position;
+      });
+    const gpsCoord = () => coord();
+    return gpsCoord();
+  };
+
   let totalWords = props.item;
   let firstWord = totalWords.replace(/ .*/, "");
   return (
@@ -13,11 +25,12 @@ const StationDetails = props => {
           title={props.item}
           key={props.item}
           style={styles.textStyle}
-          onPress={() =>
-            props.navigation.navigate("SongList2", {
-              genre: firstWord
-            })
-          }
+          onPress={() => {
+            return props.navigation.navigate("SongList2", {
+              genre: firstWord,
+              coordinates: gpsfunc()
+            });
+          }}
         />
       </CardSection>
     </Card>

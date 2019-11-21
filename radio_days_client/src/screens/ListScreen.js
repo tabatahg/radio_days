@@ -16,36 +16,13 @@ const stations = [
 ];
 
 const ListScreen = props => {
-  const [gps, setGps] = useState([]);
-
-  useEffect(() => {
-    (function findCoordinates() {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          setGps({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          });
-        },
-        error => console.log(error),
-        { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
-      );
-    })();
-  }, []);
-
   return (
     <View>
       <FlatList
         data={stations}
         keyExtractor={station => station}
         renderItem={({ item }) => {
-          return (
-            <StationDetails
-              item={item}
-              navigation={props.navigation}
-              location={gps}
-            />
-          );
+          return <StationDetails item={item} navigation={props.navigation} />;
         }}
       />
     </View>

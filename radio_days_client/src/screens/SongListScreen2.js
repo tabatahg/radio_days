@@ -4,6 +4,9 @@ import { getMusicByVenues } from "../api/bandsintown";
 import { StyleSheet, FlatList, View, Button } from "react-native";
 
 const SongListScreen2 = props => {
+  console.log(props.navigation.getParam("coordinates"));
+  const jimmy = props.navigation.getParam("coordinates");
+  console.log(jimmy);
   const [artists, setArtists] = useState({});
 
   useEffect(() => {
